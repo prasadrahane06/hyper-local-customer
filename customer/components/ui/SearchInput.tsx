@@ -57,13 +57,14 @@ const SearchInput: React.FC<SearchInputProps> = ({
           source={images.search as ImageSourcePropType}
           style={styles.icon}
           resizeMode="contain"
+          tintColor="black"
         />
       </TouchableOpacity>
     </View>
   );
 };
 
-// Stylesheet
+// Stylesheetr
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
@@ -75,7 +76,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 1,
     borderColor: "#fff",
-    marginTop: 16,
   },
   input: {
     flex: 1,

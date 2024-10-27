@@ -3,8 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import * as Location from "expo-location";
 
 const CurrentLocation = () => {
-  const [city, setCity] = useState<string | null>(null);
-  const [region, setRegion] = useState<string | null>(null);
+  const [placeName, setPlaceName] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
@@ -24,8 +23,8 @@ const CurrentLocation = () => {
       });
 
       if (result) {
-        setCity(result.city || "Unknown City");
-        setRegion(result.region || "Unknown Region");
+        const address = `${result.city}, ${result.region}`;
+        setPlaceName(address);
       }
     })();
   }, []);
@@ -35,11 +34,7 @@ const CurrentLocation = () => {
       {errorMsg ? (
         <Text style={styles.error}>{errorMsg}</Text>
       ) : (
-        <View style={styles.locationContainer}>
-          <Text style={styles.city}>{city || "Loading..."}</Text>
-
-          <Text style={styles.region}>{region || ""}</Text>
-        </View>
+        <Text style={styles.text}>{placeName || "Loading..."}</Text> // Show place name or loading text
       )}
     </View>
   );
@@ -49,20 +44,17 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
   },
-  locationContainer: {
-    alignItems: "center",
-  },
-  city: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  region: {
-    fontSize: 16,
-    color: "bold",
-  },
   error: {
     color: "red",
     marginTop: 10,
+  },
+  text: {
+    fontSize: 16,
+    color: "black",
+    textAlign: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: "#000",
+    marginTop: 7,
   },
 });
 

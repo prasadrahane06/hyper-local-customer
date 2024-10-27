@@ -68,6 +68,21 @@ const TabLayout: React.FC = () => {
           }}
         />
         <Tabs.Screen
+          name="wallet"
+          options={{
+            title: "Wallet",
+            headerShown: false,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon
+                color={color}
+                name="Wallet"
+                focused={focused}
+                icon={images.wallet}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
           name="profile"
           options={{
             title: "Profile",

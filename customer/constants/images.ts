@@ -10,6 +10,9 @@ import orders from "../assets/images/grocery-store.png";
 import profile from "../assets/images/user.png";
 import location from "../assets/images/location.png";
 import notification from "../assets/images/notification.png";
+import wallet from "../assets/images/wallet-filled-money-tool.png";
+import checkout from "../assets/images/checkout.png";
+import demoitem from "../assets/images/451.jpg";
 
 export default {
   phone,
@@ -24,4 +27,7 @@ export default {
   profile,
   location,
   notification,
+  checkout,
+  wallet,
+  demoitem,
 };
