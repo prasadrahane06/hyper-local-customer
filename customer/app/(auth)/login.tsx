@@ -22,7 +22,9 @@ const Login: React.FC = () => {
     password: "",
   });
 
-  const submit = async () => {};
+  const submit = () => {
+    router.push("/home");
+  };
 
   return (
     <SafeAreaView style={styles.container}>

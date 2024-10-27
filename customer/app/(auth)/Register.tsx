@@ -18,7 +18,7 @@ import FormField from "@/components/ui/FormField";
 import CustomButton from "@/components/ui/CustomButton";
 import { Picker } from "@react-native-picker/picker";
 import { State, City, IState, ICity } from "country-state-city";
-const Login: React.FC = () => {
+const Register: React.FC = () => {
   const [form, setForm] = useState({
     firstname: "",
     lastname: "",
@@ -32,19 +32,19 @@ const Login: React.FC = () => {
   const [states, setStates] = useState<IState[]>([]);
   const [cities, setCities] = useState<ICity[]>([]);
   useEffect(() => {
-    // Load states for India on component mount
     const indiaStates = State.getStatesOfCountry("IN");
     setStates(indiaStates);
   }, []);
 
-  // Load cities when the selected state changes
   const handleStateChange = (stateCode: string) => {
     setSelectedState(stateCode);
     const citiesList = City.getCitiesOfState("IN", stateCode);
     setCities(citiesList);
     setSelectedCity(""); // Reset city selection on state change
   };
-  const submit = async () => {};
+  const submit = () => {
+    router.push("/home");
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -240,4 +240,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default Register;
