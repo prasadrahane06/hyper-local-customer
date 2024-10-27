@@ -19,6 +19,7 @@ interface FormFieldProps extends TextInputProps {
   iseditable?: boolean;
   multiline?: boolean;
   extraStyles?: object; // Changed to object
+  moreStyles?: object; // Changed to object
   numberOfLines?: number;
 }
 
@@ -32,15 +33,16 @@ const FormField: React.FC<FormFieldProps> = ({
   multiline = false,
   extraStyles,
   numberOfLines,
+  moreStyles,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <View style={[styles.container, extraStyles]}>
+    <View style={[styles.container]}>
       <Text style={(styles.title, otherStyles)}>{title}</Text>
 
-      <View style={styles.inputContainer}>
+      <View style={[styles.inputContainer, extraStyles]}>
         <TextInput
           style={styles.input}
           value={value}

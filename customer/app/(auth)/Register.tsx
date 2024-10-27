@@ -11,17 +11,39 @@ import {
   StyleSheet,
   ImageSourcePropType,
 } from "react-native";
+import images from "../../constants/images";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "@/components/ui/FormField";
 import CustomButton from "@/components/ui/CustomButton";
-import images from "../../constants/images";
+import { Picker } from "@react-native-picker/picker";
+import { State, City, IState, ICity } from "country-state-city";
 const Login: React.FC = () => {
   const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
+    firstname: "",
+    lastname: "",
 
+    address: "",
+    password: "",
+    confirmpassword: "",
+  });
+  const [selectedState, setSelectedState] = useState<string>("");
+  const [selectedCity, setSelectedCity] = useState<string>("");
+  const [states, setStates] = useState<IState[]>([]);
+  const [cities, setCities] = useState<ICity[]>([]);
+  useEffect(() => {
+    // Load states for India on component mount
+    const indiaStates = State.getStatesOfCountry("IN");
+    setStates(indiaStates);
+  }, []);
+
+  // Load cities when the selected state changes
+  const handleStateChange = (stateCode: string) => {
+    setSelectedState(stateCode);
+    const citiesList = City.getCitiesOfState("IN", stateCode);
+    setCities(citiesList);
+    setSelectedCity(""); // Reset city selection on state change
+  };
   const submit = async () => {};
 
   return (
@@ -32,34 +54,75 @@ const Login: React.FC = () => {
       >
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View style={styles.content}>
-            <Text style={styles.title}>SIGN UP</Text>
+            <View style={styles.headerContainer}>
+              <TouchableOpacity onPress={() => router.push("/")}>
+                <Image
+                  source={images.back as ImageSourcePropType}
+                  style={styles.backImage}
+                  resizeMode="contain"
+                  tintColor="black"
+                />
+              </TouchableOpacity>
+              <Text style={styles.title}>SIGN UP</Text>
+            </View>
             <FormField
               title="Firstname"
-              value={form.email}
-              handleChangeText={(e) => setForm({ ...form, email: e })}
+              value={form.firstname}
+              handleChangeText={(e) => setForm({ ...form, firstname: e })}
               otherStyles={styles.Formtext}
               placeholder="Enter First Name"
             />
             <FormField
               title="Lastname"
-              value={form.email}
-              handleChangeText={(e) => setForm({ ...form, email: e })}
+              value={form.lastname}
+              handleChangeText={(e) => setForm({ ...form, lastname: e })}
               otherStyles={styles.Formtext}
               placeholder="Enter Last Name"
             />
-            <FormField
-              title="City"
-              value={form.email}
-              handleChangeText={(e) => setForm({ ...form, email: e })}
-              otherStyles={styles.Formtext}
-              placeholder="Select a City..."
-            />
+            <Text style={styles.label}>State</Text>
+            <View style={styles.pickerWrapper}>
+              <Picker
+                selectedValue={selectedState}
+                style={styles.picker}
+                onValueChange={(itemValue) => handleStateChange(itemValue)}
+              >
+                <Picker.Item label="Select a state..." value="" />
+                {states.map((state) => (
+                  <Picker.Item
+                    key={state.isoCode}
+                    label={state.name}
+                    value={state.isoCode}
+                  />
+                ))}
+              </Picker>
+            </View>
+            <Text style={styles.label}>City</Text>
+            <View style={styles.pickerWrapper}>
+              <Picker
+                selectedValue={selectedCity}
+                style={styles.picker}
+                onValueChange={(itemValue) => setSelectedCity(itemValue)}
+                enabled={selectedState !== ""} // Enable only if a state is selected
+              >
+                <Picker.Item label="Select a city..." value="" />
+                {cities.map((city) => (
+                  <Picker.Item
+                    key={city.name}
+                    label={city.name}
+                    value={city.name}
+                  />
+                ))}
+              </Picker>
+            </View>
             <FormField
               title="Address"
-              value={form.email}
-              handleChangeText={(e) => setForm({ ...form, email: e })}
+              value={form.address}
+              numberOfLines={4}
+              multiline={true}
+              handleChangeText={(e) => setForm({ ...form, address: e })}
               otherStyles={styles.Formtext}
-              placeholder="Enter address"
+              extraStyles={styles.addressInput}
+              placeholder="Enter address "
             />
             <FormField
               title="Password"
@@ -70,14 +133,14 @@ const Login: React.FC = () => {
             />
             <FormField
               title="Confirm Password"
-              value={form.password}
-              handleChangeText={(e) => setForm({ ...form, password: e })}
+              value={form.confirmpassword}
+              handleChangeText={(e) => setForm({ ...form, confirmpassword: e })}
               otherStyles={styles.Formtext}
               placeholder="Confirm Password"
             />
             <View style={styles.buttonContainer}>
               <CustomButton
-                title="LOGIN"
+                title="SIGNUP"
                 handlePress={submit}
                 containerStyles={styles.button}
               />
@@ -98,12 +161,22 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 1,
     paddingHorizontal: 16,
-    marginTop: 28,
+    paddingVertical: 16,
   },
-
+  headerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 5,
+  },
+  backImage: {
+    width: 24,
+    height: 24,
+    tintColor: "black",
+  },
   title: {
+    flex: 1,
     fontWeight: "bold",
-    fontSize: 30,
+    fontSize: 20,
     color: "#000",
     letterSpacing: 1,
     textAlign: "center",
@@ -124,7 +197,6 @@ const styles = StyleSheet.create({
     color: "#000",
     fontWeight: "bold",
     fontSize: 20,
-    marginTop: 10,
     marginBottom: 5,
     letterSpacing: 0.5,
     marginLeft: 3,
@@ -135,6 +207,36 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 15,
     textDecorationLine: "underline",
+  },
+  label: {
+    color: "#000",
+    fontWeight: "bold",
+    fontSize: 20,
+    marginBottom: 5,
+    letterSpacing: 0.5,
+    marginLeft: 3,
+    marginTop: 10,
+  },
+  image: {
+    maxWidth: 40,
+    width: "100%",
+    height: 250,
+  },
+  pickerWrapper: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 12,
+    borderColor: "#CCCCCC",
+    borderWidth: 2,
+
+    paddingHorizontal: 8,
+  },
+  picker: {
+    height: 50,
+    color: "#000000",
+    width: "100%",
+  },
+  addressInput: {
+    height: 100,
   },
 });
 
