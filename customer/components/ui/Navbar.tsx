@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   ImageSourcePropType,
-  KeyboardAvoidingView,
-  Platform,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -30,46 +28,41 @@ const Navbar = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <View style={styles.homecontainer}>
-            <View style={styles.imageContainer}>
-              <View style={styles.locationConatiner}>
-                <Image
-                  source={images.location as ImageSourcePropType}
-                  resizeMode="contain"
-                  tintColor="black"
-                  style={styles.locationImages}
-                />
-                <Location />
-              </View>
-              <View style={styles.Icons}>
-                <Image
-                  source={images.checkout as ImageSourcePropType}
-                  resizeMode="contain"
-                  tintColor="black"
-                  style={styles.Images}
-                />
-                <Image
-                  source={images.notification as ImageSourcePropType}
-                  resizeMode="contain"
-                  tintColor="black"
-                  style={styles.Images}
-                />
-              </View>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={styles.homeContainer}>
+          <View style={styles.imageContainer}>
+            <View style={styles.locationContainer}>
+              <Image
+                source={images.location as ImageSourcePropType}
+                resizeMode="contain"
+                tintColor="black"
+                style={styles.locationImages}
+              />
+              <Location />
             </View>
-            <SearchInput
-              placeholder="Search"
-              value={""}
-              onChangeText={(text) => console.log(text)}
-            />
-            <Text style={styles.dateText}>{currentDate}</Text>
+            <View style={styles.icons}>
+              <Image
+                source={images.checkout as ImageSourcePropType}
+                resizeMode="contain"
+                tintColor="black"
+                style={styles.images}
+              />
+              <Image
+                source={images.notification as ImageSourcePropType}
+                resizeMode="contain"
+                tintColor="black"
+                style={styles.images}
+              />
+            </View>
           </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+          <SearchInput
+            placeholder="Search"
+            value={""} // Make sure you have a state for the input value
+            onChangeText={(text) => console.log(text)}
+          />
+          <Text style={styles.dateText}>{currentDate}</Text>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -78,10 +71,9 @@ export default Navbar;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0, // Set flex to 0 or a specific height
   },
-  homecontainer: {
-    flex: 1,
+  homeContainer: {
     paddingHorizontal: 16,
     paddingVertical: 25,
     width: "100%",
@@ -95,7 +87,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 20,
   },
-  Images: {
+  images: {
     width: 24,
     height: 24,
   },
@@ -103,14 +95,14 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
   },
-  locationConatiner: {
+  locationContainer: {
     flexDirection: "row",
     gap: 5,
     justifyContent: "flex-start",
     alignItems: "center",
     marginTop: 20,
   },
-  Icons: {
+  icons: {
     flexDirection: "row",
     gap: 10,
     marginTop: 20,
@@ -118,7 +110,6 @@ const styles = StyleSheet.create({
   dateText: {
     fontSize: 16,
     fontWeight: "400",
-
     color: "black",
     marginTop: 10,
     textAlign: "center",

@@ -96,18 +96,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#EDF1D6",
+    height: 160,
   },
   title: {
     fontSize: 18,
     fontWeight: "bold",
-    paddingHorizontal: 16,
     letterSpacing: 0.5,
     color: "#000",
+    marginBottom: 10,
+    marginTop: 10,
   },
   scrollViewContent: {},
   cardContainer: {
     width: screenWidth,
-    paddingHorizontal: 16,
   },
   cardStyle: {
     backgroundColor: "transparent",
