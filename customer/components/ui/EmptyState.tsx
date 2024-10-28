@@ -45,9 +45,11 @@ const styles = StyleSheet.create({
     height: 200,
   },
   subtitle: {
-    fontSize: 24,
+    fontSize: 28,
+    fontWeight: "bold",
+
     textAlign: "center",
-    color: "#fff", // Set to white or any color needed
+    color: "#000", // Set to white or any color needed
     marginTop: 16,
   },
 });

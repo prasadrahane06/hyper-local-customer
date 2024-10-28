@@ -11,13 +11,21 @@ interface CardProps {
   image: ImageSourcePropType;
   name: string;
   offer: string;
+  cardStyles: Object;
+  imageStyles: Object;
 }
 
-const Card: React.FC<CardProps> = ({ image, name, offer }) => {
+const Card: React.FC<CardProps> = ({
+  image,
+  name,
+  offer,
+  cardStyles,
+  imageStyles,
+}) => {
   return (
     <View style={styles.container}>
-      <View style={styles.card}>
-        <Image source={image} style={styles.image} resizeMode="contain" />
+      <View style={[styles.card, cardStyles]}>
+        <Image source={image} style={[styles.image, imageStyles]} />
         <Text style={styles.name} numberOfLines={1} ellipsizeMode="tail">
           {name}
         </Text>
@@ -35,7 +43,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginBottom: 16,
   },
   card: {
     backgroundColor: "#FFFFFF",
@@ -54,7 +61,7 @@ const styles = StyleSheet.create({
   image: {
     width: 80,
     height: 80,
-    marginBottom: 8,
+    resizeMode: "contain",
   },
   name: {
     fontSize: 14,
@@ -66,7 +73,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#10B981",
     fontWeight: "500",
-    backgroundColor: "#F0F8FF",
     paddingHorizontal: 4,
     paddingVertical: 2,
     borderRadius: 4,
