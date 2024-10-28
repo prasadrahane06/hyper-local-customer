@@ -56,7 +56,7 @@ const Navbar = () => {
             </View>
           </View>
           <SearchInput
-            placeholder="Search"
+            placeholder="Search by product name or category"
             value={""} // Make sure you have a state for the input value
             onChangeText={(text) => console.log(text)}
           />

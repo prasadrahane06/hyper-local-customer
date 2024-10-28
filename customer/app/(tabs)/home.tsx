@@ -71,7 +71,13 @@ const Home = () => {
             <Horizontal />
           </View>
           <View style={styles.row}>
-            <ViewAll />
+            <ViewAll title="Vegetables" />
+          </View>
+          <View style={styles.row}>
+            <ViewAll title="Fruits" />
+          </View>
+          <View style={styles.row}>
+            <ViewAll title="Non Veg" />
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

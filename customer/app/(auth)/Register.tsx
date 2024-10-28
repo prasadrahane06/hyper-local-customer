@@ -55,7 +55,7 @@ const Register: React.FC = () => {
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View style={styles.content}>
             <View style={styles.headerContainer}>
-              <TouchableOpacity onPress={() => router.push("/")}>
+              <TouchableOpacity onPress={() => router.back()}>
                 <Image
                   source={images.back as ImageSourcePropType}
                   style={styles.backImage}
