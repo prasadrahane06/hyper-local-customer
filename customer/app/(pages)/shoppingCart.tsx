@@ -17,9 +17,10 @@ import EmptyState from "../../components/ui/EmptyState";
 import Card from "@/components/ui/card";
 import images from "@/constants/images";
 import Header from "@/components/ui/subCatHead";
+import Payable from "@/components/ui/payable";
 import { router } from "expo-router";
 
-const subCategory: React.FC = () => {
+const shopingCart: React.FC = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -31,6 +32,7 @@ const subCategory: React.FC = () => {
   const categories = [
     {
       id: "1",
+      category: "Foodgrains oil and Masala",
       image: images.demoitem,
       name: "sugar and honey ",
       quantity: "1000gm",
@@ -38,24 +40,12 @@ const subCategory: React.FC = () => {
     },
     {
       id: "2",
+      category: "Home Care",
+
       image: images.demoitem,
       name: "Bread ",
       quantity: "2000gm",
       price: "300",
-    },
-    {
-      id: "3",
-      image: images.demoitem,
-      name: "Meat",
-      quantity: "3000gm",
-      price: "250",
-    },
-    {
-      id: "4",
-      image: images.demoitem,
-      name: "Chicken",
-      quantity: "4000gm",
-      price: "400",
     },
   ];
 
@@ -70,41 +60,49 @@ const subCategory: React.FC = () => {
             tintColor="black"
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => router.push("/shoppingCart")}>
-          <Image
-            source={images.checkout as ImageSourcePropType}
-            resizeMode="contain"
-            tintColor="black"
-            style={styles.images}
-          />
-        </TouchableOpacity>
+        <Text style={styles.title}>Shopping Cart</Text>
       </View>
-      <Header title={""} />
-      <FlatList
-        data={categories}
-        keyExtractor={(item) => item?.id.toString()}
-        renderItem={({ item }) => (
-          <Card
-            image={item.image as ImageSourcePropType}
-            name={item.name}
-            offer=""
-            quantity={item.quantity}
-            price={item.price}
-            cardStyles={styles.cardStyle}
-            imageStyles={styles.imageStyle}
-            nameStyles={styles.nameStyle}
-            priceStyles={styles.priceStyle}
-            buttonStyle={styles.buttonStyles}
-            quantitySelectorStyle={styles.quantitySelectorStyles}
-          />
-        )}
-        ListEmptyComponent={() => (
-          <EmptyState title="No Events Found" subtitle="No Events available." />
-        )}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      />
+
+      <View style={styles.contentContainer}>
+        <FlatList
+          data={categories}
+          keyExtractor={(item) => item?.id.toString()}
+          renderItem={({ item }) => (
+            <>
+              <View style={styles.totals}>
+                <Text style={styles.prices}>{item.category}</Text>
+                <Text style={styles.prices}>
+                  subTotal: {item.price} | 1 item(s)
+                </Text>
+              </View>
+              <Card
+                image={item.image as ImageSourcePropType}
+                name={item.name}
+                offer=""
+                quantity={item.quantity}
+                price={item.price}
+                cardStyles={styles.cardStyle}
+                imageStyles={styles.imageStyle}
+                nameStyles={styles.nameStyle}
+                priceStyles={styles.priceStyle}
+                buttonStyle={styles.buttonStyles}
+                quantitySelectorStyle={styles.quantitySelectorStyles}
+              />
+            </>
+          )}
+          ListEmptyComponent={() => (
+            <EmptyState
+              title="No Events Found"
+              subtitle="No Events available."
+            />
+          )}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        />
+
+        <Payable />
+      </View>
     </SafeAreaView>
   );
 };
@@ -112,6 +110,9 @@ const subCategory: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#EDF1D6",
+    flex: 1,
+  },
+  contentContainer: {
     flex: 1,
   },
   cardContainer: {
@@ -125,7 +126,6 @@ const styles = StyleSheet.create({
     flexDirection: "row", // Row layout for image and content columns
     width: "100%",
     height: 190,
-    marginVertical: 10,
     backgroundColor: "#FFFFFF",
     borderRadius: 8,
     padding: 5,
@@ -135,6 +135,21 @@ const styles = StyleSheet.create({
     shadowOpacity: 0,
     shadowRadius: 0,
     elevation: 0,
+  },
+  title: {
+    flex: 1,
+    fontWeight: "bold",
+    fontSize: 20,
+    color: "#000",
+    letterSpacing: 1,
+    textAlign: "center",
+  },
+  prices: {
+    flex: 1,
+    fontSize: 15,
+    color: "#000",
+    letterSpacing: 1,
+    textAlign: "center",
   },
   imageStyle: {
     width: 120,
@@ -162,6 +177,13 @@ const styles = StyleSheet.create({
     gap: 10,
     width: 200,
   },
+  totals: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "lightgray",
+    paddingVertical: 5,
+  },
   buttonStyles: {
     width: 150,
     minHeight: 35,
@@ -182,9 +204,11 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     flexDirection: "row",
+    backgroundColor: "#0fd180",
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 10,
+    paddingVertical: 10,
   },
   backImage: {
     width: 24,
@@ -192,4 +216,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default subCategory;
+export default shopingCart;

@@ -12,6 +12,12 @@ const PagesLayout: React.FC = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="shoppingCart"
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack>
     </View>
   );

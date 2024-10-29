@@ -7,10 +7,12 @@ import {
   Text,
   View,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import Location from "../../components/ui/location";
 import images from "../../constants/images";
 import SearchInput from "@/components/ui/SearchInput";
+import { router } from "expo-router";
 
 const Navbar = () => {
   const [currentDate, setCurrentDate] = useState("");
@@ -41,12 +43,14 @@ const Navbar = () => {
               <Location />
             </View>
             <View style={styles.icons}>
-              <Image
-                source={images.checkout as ImageSourcePropType}
-                resizeMode="contain"
-                tintColor="black"
-                style={styles.images}
-              />
+              <TouchableOpacity onPress={() => router.push("/shoppingCart")}>
+                <Image
+                  source={images.checkout as ImageSourcePropType}
+                  resizeMode="contain"
+                  tintColor="black"
+                  style={styles.images}
+                />
+              </TouchableOpacity>
               <Image
                 source={images.notification as ImageSourcePropType}
                 resizeMode="contain"
