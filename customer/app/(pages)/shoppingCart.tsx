@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   nameStyle: {
-    fontSize: 25,
+    fontSize: 19,
     fontWeight: "bold",
     color: "#000",
     paddingHorizontal: 0,
@@ -179,6 +179,7 @@ const styles = StyleSheet.create({
   },
   totals: {
     flexDirection: "row",
+    paddingHorizontal: 10,
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: "lightgray",
