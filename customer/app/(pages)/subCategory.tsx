@@ -33,6 +33,7 @@ const subCategory: React.FC = () => {
     {
       id: "1",
       image: images.demoitem,
+      mrp: "350",
       name: "sugar and honey ",
       quantity: "1000gm",
       price: "200",
@@ -41,6 +42,8 @@ const subCategory: React.FC = () => {
       id: "2",
       image: images.demoitem,
       name: "Bread ",
+      mrp: "350",
+
       quantity: "2000gm",
       price: "300",
     },
@@ -48,6 +51,8 @@ const subCategory: React.FC = () => {
       id: "3",
       image: images.demoitem,
       name: "Meat",
+      mrp: "350",
+
       quantity: "3000gm",
       price: "250",
     },
@@ -55,6 +60,8 @@ const subCategory: React.FC = () => {
       id: "4",
       image: images.demoitem,
       name: "Chicken",
+      mrp: "350",
+
       quantity: "4000gm",
       price: "400",
     },
@@ -101,6 +108,7 @@ const subCategory: React.FC = () => {
             image={item.image as ImageSourcePropType}
             name={item.name}
             offer=""
+            mrp={item.mrp}
             quantity={item.quantity}
             price={item.price}
             cardStyles={styles.cardStyle}

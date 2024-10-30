@@ -1,29 +1,27 @@
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
   View,
-  FlatList,
-  RefreshControl,
-  Alert,
-  ImageSourcePropType,
-  ScrollView,
   Image,
   TouchableOpacity,
+  ImageSourcePropType,
 } from "react-native";
-import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import SearchInput from "../../components/ui/SearchInput";
-import EmptyState from "../../components/ui/EmptyState";
-import Card from "@/components/ui/card";
 import images from "@/constants/images";
-import Header from "@/components/ui/subCatHead";
-import Payable from "@/components/ui/payable";
 import { router } from "expo-router";
 import CustomButton from "@/components/ui/CustomButton";
 
 const delivery: React.FC = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
+  // State for storing address
+  const [address, setAddress] = useState({
+    id: 1,
+    place: "Home",
+    details: "123 Main St, City, State, Zip",
+  });
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -42,7 +40,6 @@ const delivery: React.FC = () => {
             source={images.back as ImageSourcePropType}
             style={styles.backImage}
             resizeMode="contain"
-            tintColor="black"
           />
         </TouchableOpacity>
 
@@ -57,13 +54,31 @@ const delivery: React.FC = () => {
         />
         <Text style={styles.title2}>Doorstep Delivery</Text>
       </View>
+
       <View style={styles.contentContainer}>
-        <CustomButton
-          title=" + Add Address"
-          handlePress={Add}
-          containerStyles={styles.button}
-          textStyles={styles.textStyle}
-        />
+        {!address && (
+          <CustomButton
+            title=" + Add Address"
+            handlePress={Add}
+            containerStyles={styles.button}
+            textStyles={styles.textStyle}
+          />
+        )}
+
+        {address && (
+          <View style={styles.addressCard}>
+            <TouchableOpacity style={styles.addressInfo}>
+              <Text style={styles.selectedText}>{address.place}</Text>
+              <Text style={styles.addressText}>{address.details}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => router.push("/chooseAddress")}
+              style={styles.editIconContainer}
+            >
+              <Text style={styles.selectedText2}>Change</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );
@@ -79,7 +94,31 @@ const styles = StyleSheet.create({
     marginTop: 5,
     paddingHorizontal: 10,
   },
-
+  addressCard: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: "#CCCCCC",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 10,
+  },
+  addressInfo: {
+    flex: 1,
+  },
+  selectedText: {
+    color: "#000",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  selectedText2: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#0fd180",
+  },
   title: {
     flex: 1,
     fontWeight: "bold",
@@ -88,7 +127,13 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     textAlign: "center",
   },
-
+  addressText: {
+    fontSize: 14,
+    color: "#555",
+  },
+  editIconContainer: {
+    padding: 5,
+  },
   headerContainer: {
     flexDirection: "row",
     backgroundColor: "#0fd180",
@@ -126,7 +171,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 10,
     paddingHorizontal: 10,
-
     gap: 10,
   },
 });

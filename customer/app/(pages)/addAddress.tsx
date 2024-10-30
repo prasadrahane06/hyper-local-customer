@@ -17,21 +17,11 @@ import * as Location from "expo-location";
 import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import SearchInput from "../../components/ui/SearchInput";
-import EmptyState from "../../components/ui/EmptyState";
-import Card from "@/components/ui/card";
 import images from "@/constants/images";
-import Header from "@/components/ui/subCatHead";
-import Payable from "@/components/ui/payable";
 import { router } from "expo-router";
 import CustomButton from "@/components/ui/CustomButton";
 import Manual from "@/components/ui/manualAddress";
-interface Address {
-  name?: string;
-  street?: string;
-  city?: string;
-  region?: string;
-  postalCode?: string;
-}
+
 const addAddress: React.FC = () => {
   const [location, setLocation] = useState<Location.LocationObject | null>(
     null
@@ -146,7 +136,6 @@ const addAddress: React.FC = () => {
         region={region}
         onRegionChangeComplete={handleRegionChange}
       >
-        {/* Use the location state for the Marker */}
         {location && (
           <Marker
             coordinate={{

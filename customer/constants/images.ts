@@ -23,9 +23,13 @@ import img7 from "../assets/images/7.jpg";
 import img8 from "../assets/images/8.jpeg";
 import delivery from "../assets/images/delivery.png";
 import pin from "../assets/images/location (1).png";
+import work from "../assets/images/suitcase.png";
+import other from "../assets/images/menu.png";
+import pencil from "../assets/images/pencil.png";
 
 export default {
   phone,
+  pencil,
   eyeHide,
   eye,
   empty,
@@ -50,4 +54,6 @@ export default {
   img8,
   delivery,
   pin,
+  work,
+  other,
 };

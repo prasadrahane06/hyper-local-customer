@@ -30,6 +30,12 @@ const PagesLayout: React.FC = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="chooseAddress"
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack>
     </View>
   );

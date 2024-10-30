@@ -28,22 +28,11 @@ const manualAddress: React.FC = () => {
     city: "",
     state: "",
   });
-  const [selectedState, setSelectedState] = useState<string>("");
-  const [selectedCity, setSelectedCity] = useState<string>("");
-  const [states, setStates] = useState<IState[]>([]);
-  const [cities, setCities] = useState<ICity[]>([]);
-  useEffect(() => {
-    const indiaStates = State.getStatesOfCountry("IN");
-    setStates(indiaStates);
-  }, []);
 
-  const handleStateChange = (stateCode: string) => {
-    setSelectedState(stateCode);
-    const citiesList = City.getCitiesOfState("IN", stateCode);
-    setCities(citiesList);
-    setSelectedCity(""); // Reset city selection on state change
+  const [selectedPlace, setSelectedPlace] = useState<string>("");
+  const handlePlaceSelect = (place: string) => {
+    setSelectedPlace(place);
   };
-
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -119,6 +108,41 @@ const manualAddress: React.FC = () => {
               extraStyles={styles.addressInput}
               placeholder="State"
             />
+            <View style={styles.PlaceContainer}>
+              {["home", "work", "other"].map((place) => (
+                <TouchableOpacity
+                  key={place}
+                  style={[
+                    styles.place,
+                    selectedPlace === place && styles.selectedPlace,
+                  ]}
+                  onPress={() => handlePlaceSelect(place)}
+                >
+                  <Image
+                    source={
+                      place === "home"
+                        ? (images.home as ImageSourcePropType)
+                        : place === "work"
+                        ? (images.work as ImageSourcePropType)
+                        : (images.other as ImageSourcePropType)
+                    }
+                    style={[
+                      styles.images,
+                      selectedPlace === place && styles.selectedImage,
+                    ]}
+                    resizeMode="contain"
+                  />
+                  <Text
+                    style={[
+                      styles.placeText,
+                      selectedPlace === place && styles.selectedText,
+                    ]}
+                  >
+                    {place.charAt(0).toUpperCase() + place.slice(1)}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -130,6 +154,46 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+  },
+  PlaceContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 5,
+  },
+  place: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    gap: 5,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "transparent",
+  },
+  selectedPlace: {
+    borderColor: "#0fd180", // Border color for selected place
+    backgroundColor: "#e0f7ec",
+  },
+  images: {
+    width: 24,
+    height: 24,
+    tintColor: "#000",
+  },
+  selectedImage: {
+    tintColor: "#0fd180",
+  },
+  placeText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    letterSpacing: 0.5,
+    color: "#000",
+    marginTop: 5,
+  },
+  selectedText: {
+    letterSpacing: 0.5,
+
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#0fd180",
   },
   content: {
     width: "100%",
