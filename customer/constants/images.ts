@@ -21,6 +21,8 @@ import img5 from "../assets/images/5.jpg";
 import img6 from "../assets/images/6.jpg";
 import img7 from "../assets/images/7.jpg";
 import img8 from "../assets/images/8.jpeg";
+import delivery from "../assets/images/delivery.png";
+import pin from "../assets/images/location (1).png";
 
 export default {
   phone,
@@ -46,4 +48,6 @@ export default {
   img6,
   img7,
   img8,
+  delivery,
+  pin,
 };

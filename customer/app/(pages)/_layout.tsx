@@ -18,6 +18,18 @@ const PagesLayout: React.FC = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="delivery"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="addAddress"
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack>
     </View>
   );

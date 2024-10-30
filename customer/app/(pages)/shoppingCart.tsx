@@ -32,18 +32,20 @@ const shopingCart: React.FC = () => {
   const categories = [
     {
       id: "1",
-      category: "Foodgrains oil and Masala",
       image: images.demoitem,
-      name: "sugar and honey ",
+      name: "sugar and honey",
+      mrp: "350",
+      category: "Frits & Vegetables",
       quantity: "1000gm",
       price: "200",
     },
     {
       id: "2",
-      category: "Home Care",
-
       image: images.demoitem,
-      name: "Bread ",
+      name: "Bread",
+      mrp: "350",
+      category: "Non Veg",
+
       quantity: "2000gm",
       price: "300",
     },
@@ -80,6 +82,7 @@ const shopingCart: React.FC = () => {
                 name={item.name}
                 offer=""
                 quantity={item.quantity}
+                mrp={item.mrp}
                 price={item.price}
                 cardStyles={styles.cardStyle}
                 imageStyles={styles.imageStyle}

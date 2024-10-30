@@ -16,7 +16,8 @@ import { router } from "expo-router";
 
 const Navbar = () => {
   const [currentDate, setCurrentDate] = useState("");
-
+  const [cartItemCount, setCartItemCount] = useState(2);
+  const [notificationCount, setNotificationCount] = useState(3);
   useEffect(() => {
     const date = new Date();
     const formattedDate = date.toLocaleDateString("en-US", {
@@ -44,12 +45,19 @@ const Navbar = () => {
             </View>
             <View style={styles.icons}>
               <TouchableOpacity onPress={() => router.push("/shoppingCart")}>
-                <Image
-                  source={images.checkout as ImageSourcePropType}
-                  resizeMode="contain"
-                  tintColor="black"
-                  style={styles.images}
-                />
+                <View style={styles.checkoutContainer}>
+                  <Image
+                    source={images.checkout as ImageSourcePropType}
+                    resizeMode="contain"
+                    tintColor="black"
+                    style={styles.images}
+                  />
+                  {cartItemCount > 0 && (
+                    <View style={styles.badge}>
+                      <Text style={styles.badgeText}>{cartItemCount}</Text>
+                    </View>
+                  )}
+                </View>
               </TouchableOpacity>
               <Image
                 source={images.notification as ImageSourcePropType}
@@ -57,6 +65,11 @@ const Navbar = () => {
                 tintColor="black"
                 style={styles.images}
               />
+              {notificationCount > 0 && (
+                <View style={styles.badge}>
+                  <Text style={styles.badgeText}>{notificationCount}</Text>
+                </View>
+              )}
             </View>
           </View>
           <SearchInput
@@ -110,6 +123,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 10,
     marginTop: 20,
+  },
+  checkoutContainer: {
+    position: "relative",
+  },
+  badge: {
+    position: "absolute",
+    top: -2,
+    right: -2,
+    backgroundColor: "red",
+    borderRadius: 10,
+    width: 15,
+    height: 15,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  badgeText: {
+    color: "white",
+    fontSize: 10,
+    fontWeight: "bold",
   },
   dateText: {
     fontSize: 16,

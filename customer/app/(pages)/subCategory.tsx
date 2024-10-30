@@ -22,6 +22,7 @@ import { router } from "expo-router";
 const subCategory: React.FC = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [cartItemCount, setCartItemCount] = useState(2);
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -70,6 +71,13 @@ const subCategory: React.FC = () => {
             tintColor="black"
           />
         </TouchableOpacity>
+        <SearchInput
+          placeholder="Search "
+          value={""} // Make sure you have a state for the input value
+          onChangeText={(text) => console.log(text)}
+          searchStyles={styles.searchStyle}
+        />
+
         <TouchableOpacity onPress={() => router.push("/shoppingCart")}>
           <Image
             source={images.checkout as ImageSourcePropType}
@@ -77,6 +85,11 @@ const subCategory: React.FC = () => {
             tintColor="black"
             style={styles.images}
           />
+          {cartItemCount > 0 && (
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>{cartItemCount}</Text>
+            </View>
+          )}
         </TouchableOpacity>
       </View>
       <Header title={""} />
@@ -113,6 +126,18 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#EDF1D6",
     flex: 1,
+  },
+  searchStyle: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: 250,
+    height: 40,
+    paddingHorizontal: 16,
+    backgroundColor: "#fff",
+
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "#fff",
   },
   cardContainer: {
     marginRight: 16,
@@ -161,6 +186,22 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     gap: 10,
     width: 200,
+  },
+  badge: {
+    position: "absolute",
+    top: -2,
+    right: -2,
+    backgroundColor: "red",
+    borderRadius: 10,
+    width: 15,
+    height: 15,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  badgeText: {
+    color: "white",
+    fontSize: 10,
+    fontWeight: "bold",
   },
   buttonStyles: {
     width: 150,

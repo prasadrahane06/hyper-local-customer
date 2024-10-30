@@ -16,6 +16,7 @@ interface CardProps {
   imageStyles: Object;
   price: any;
   quantity: any;
+  mrp: any;
   nameStyles: Object;
   priceStyles: Object;
   buttonStyle: Object;
@@ -24,6 +25,8 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({
   image,
+  mrp,
+
   name,
   offer,
   cardStyles,
@@ -47,20 +50,22 @@ const Card: React.FC<CardProps> = ({
       <View style={[styles.card, cardStyles]}>
         <Image source={image} style={[styles.image, imageStyles]} />
 
-        {/* <Text
-          style={[styles.name, nameStyles]}
-          numberOfLines={1}
-          ellipsizeMode="tail"
-        >
-          {name}
-        </Text> */}
-        {offer && (
-          <Text style={styles.offer} numberOfLines={1} ellipsizeMode="tail">
-            {offer}
-          </Text>
+        {offer && name && (
+          <>
+            <Text
+              style={[styles.name, nameStyles]}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {name}
+            </Text>
+            <Text style={styles.offer} numberOfLines={1} ellipsizeMode="tail">
+              {offer}
+            </Text>
+          </>
         )}
 
-        {quantity && price && (
+        {quantity && price && mrp && (
           <View style={[styles.priceContainer, priceStyles]}>
             <Text style={[styles.name, nameStyles]} ellipsizeMode="tail">
               {name}
@@ -72,9 +77,14 @@ const Card: React.FC<CardProps> = ({
             >
               {quantity}
             </Text>
-            <Text style={styles.price} numberOfLines={1} ellipsizeMode="tail">
-              Rs {price}
-            </Text>
+            <View style={styles.expenseContainer}>
+              <Text style={styles.mrp} numberOfLines={1} ellipsizeMode="tail">
+                MRP Rs {mrp}
+              </Text>
+              <Text style={styles.price} numberOfLines={1} ellipsizeMode="tail">
+                Rs {price}
+              </Text>
+            </View>
             {currentQuantity === 0 ? (
               <TouchableOpacity
                 style={(styles.button, buttonStyle)}
@@ -210,5 +220,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     color: "#333",
+  },
+  expenseContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  mrp: {
+    textDecorationLine: "line-through",
+    color: "gray",
+    fontSize: 12,
+    fontWeight: "600",
   },
 });

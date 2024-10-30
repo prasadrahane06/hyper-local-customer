@@ -14,12 +14,14 @@ import { useRouter, usePathname } from "expo-router";
 interface SearchInputProps {
   placeholder: string;
   value: string;
+  searchStyles: Object;
   onChangeText: (text: string) => void;
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({
   placeholder,
   value,
+  searchStyles,
   onChangeText,
 }) => {
   const pathname = usePathname();
@@ -44,7 +46,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, searchStyles]}>
       <TextInput
         style={styles.input}
         value={value}

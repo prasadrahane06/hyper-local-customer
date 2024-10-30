@@ -20,6 +20,8 @@ const viewAll: React.FC<viewAllProps> = ({ title }) => {
       id: "1",
       image: images.demoitem,
       name: "sugar and honey",
+      mrp: "350",
+
       quantity: "1000gm",
       price: "200",
     },
@@ -27,6 +29,7 @@ const viewAll: React.FC<viewAllProps> = ({ title }) => {
       id: "2",
       image: images.demoitem,
       name: "Bread",
+      mrp: "350",
       quantity: "2000gm",
       price: "300",
     },
@@ -35,6 +38,8 @@ const viewAll: React.FC<viewAllProps> = ({ title }) => {
       image: images.demoitem,
       name: "Meat",
       quantity: "3000gm",
+      mrp: "350",
+
       price: "250",
     },
     {
@@ -42,6 +47,8 @@ const viewAll: React.FC<viewAllProps> = ({ title }) => {
       image: images.demoitem,
       name: "Chicken",
       quantity: "4000gm",
+      mrp: "450",
+
       price: "400",
     },
   ];
@@ -62,10 +69,14 @@ const viewAll: React.FC<viewAllProps> = ({ title }) => {
               name={item.name}
               offer=""
               quantity={item.quantity}
+              mrp={item.mrp}
               price={item.price}
               cardStyles={styles.cardStyle}
               imageStyles={styles.imageStyle}
               nameStyles={styles.nameStyle}
+              priceStyles={styles.priceStyle}
+              buttonStyle={styles.buttonStyles}
+              quantitySelectorStyle={styles.quantitySelectorStyles}
             />
           </View>
         ))}
@@ -98,8 +109,8 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   cardStyle: {
-    width: 140,
-    height: 190,
+    width: 160,
+    height: 210,
     padding: 0,
   },
   imageStyle: {
@@ -117,6 +128,29 @@ const styles = StyleSheet.create({
   textContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  priceStyle: {
+    fontSize: 18,
+    fontWeight: "600",
+    alignItems: "center",
+    marginTop: 4,
+  },
+  buttonStyles: {
+    width: 100,
+    minHeight: 30,
+    borderRadius: 7,
+    backgroundColor: "#0fd180",
+    borderColor: "transparent",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  quantitySelectorStyles: {
+    backgroundColor: "#0fd180",
+    borderRadius: 5,
+    width: 50,
+    minHeight: 30,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

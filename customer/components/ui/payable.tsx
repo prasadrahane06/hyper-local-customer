@@ -12,22 +12,27 @@ import {
 } from "react-native";
 
 const payable = () => {
+  const next = () => {
+    router.push("/delivery");
+  };
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View>
           <View style={styles.payable}>
             <Text style={styles.title}>Net Payable</Text>
-            <Text style={styles.title}>Rs 500</Text>
+            <Text style={styles.title2}>Rs 500</Text>
           </View>
           <View style={styles.buttonContainer}>
+            <View style={styles.savingsContainer}>
+              <Text style={styles.savingsText}>You are saving</Text>
+              <Text style={styles.savingsAmount}>₹ 53.00</Text>
+            </View>
             <CustomButton
               title="Continue"
               containerStyles={styles.button}
               textStyles={styles.textStyle}
-              handlePress={function (): void {
-                throw new Error("Function not implemented.");
-              }}
+              handlePress={next}
             />
           </View>
         </View>
@@ -51,27 +56,53 @@ const styles = StyleSheet.create({
     borderColor: "transparent",
   },
   buttonContainer: {
-    flex: 1,
-    alignItems: "flex-end",
-    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 10,
+    marginTop: 10,
   },
   payable: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 16,
-    paddingVertical: 10,
+    paddingTop: 10,
   },
   textStyle: {
     fontSize: 18,
   },
 
   title: {
+    fontSize: 18,
+    fontWeight: "bold",
+    letterSpacing: 0.5,
+    color: "#000",
+  },
+
+  title2: {
     fontSize: 15,
     fontWeight: "bold",
     letterSpacing: 0.5,
     color: "#000",
+  },
+  savingsContainer: {
+    width: 120,
+    minHeight: 40,
+    borderRadius: 10,
+    padding: 5,
+    backgroundColor: "#E0F7E7",
+    gap: 5,
+  },
+  savingsText: {
+    color: "#34A853",
+    fontWeight: "600",
+    fontSize: 16,
+  },
+  savingsAmount: {
+    color: "#34A853",
+    fontSize: 16,
+    fontWeight: "700",
   },
 });
 
