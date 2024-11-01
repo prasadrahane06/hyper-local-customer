@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     borderColor: "transparent",
   },
   selectedPlace: {
-    borderColor: "#0fd180", // Border color for selected place
+    borderColor: "#0fd180",
     backgroundColor: "#e0f7ec",
   },
   images: {

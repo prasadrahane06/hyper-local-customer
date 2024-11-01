@@ -2,14 +2,7 @@ import images from "@/constants/images";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import CustomButton from "./CustomButton";
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, View, Text } from "react-native";
 
 const payable = () => {
   const next = () => {

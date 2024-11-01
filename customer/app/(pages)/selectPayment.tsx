@@ -15,7 +15,7 @@ import images from "@/constants/images";
 import { router } from "expo-router";
 import CustomButton from "@/components/ui/CustomButton";
 import TimeSlot from "@/components/ui/timeSlots";
-const delivery: React.FC = () => {
+const selectPayment: React.FC = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -68,7 +68,7 @@ const delivery: React.FC = () => {
           />
         </TouchableOpacity>
 
-        <Text style={styles.title}>Delivery/Self Pickup</Text>
+        <Text style={styles.title}>Select Payment Mode</Text>
       </View>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.imageContainer}>
@@ -77,54 +77,57 @@ const delivery: React.FC = () => {
             style={styles.images}
             resizeMode="contain"
           />
-          <Text style={styles.title2}>Doorstep Delivery</Text>
+          <Text style={styles.title2}>Delivery information</Text>
         </View>
         <View style={styles.contentContainer}>
-          {!address && (
-            <CustomButton
-              title=" + Add Address"
-              handlePress={Add}
-              containerStyles={styles.button}
-              textStyles={styles.textStyle}
-            />
-          )}
-
           {address && (
             <View style={styles.addressCard}>
               <TouchableOpacity style={styles.addressInfo}>
                 <Text style={styles.selectedText}>{address.place}</Text>
                 <Text style={styles.addressText}>{address.details}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => router.push("/chooseAddress")}
-                style={styles.editIconContainer}
-              >
-                <Text style={styles.selectedText2}>Change</Text>
+                <Text style={styles.addressText2}>
+                  30 Mar ,Thu 11:00 AM to 2:00 PM
+                </Text>
               </TouchableOpacity>
             </View>
           )}
         </View>
         <View style={styles.contentContainer2}>
           <View style={styles.slotCard}>
-            <View>
-              <TouchableOpacity>
-                <Text style={styles.selectedText1}>Delivery Options</Text>
-                <Text style={styles.addressText1}>
-                  My preferred delivery slots
+            <Text style={styles.selectedText1}>Payable Amount</Text>
+            <Text style={styles.selectedText1}>₹ 112.00</Text>
+          </View>
+        </View>
+        <View style={styles.contentContainer3}>
+          <View style={styles.PlaceContainer}>
+            {[
+              "Sodexo",
+              "PayLater",
+              "Wallets",
+              "NetBanking",
+              "Pay On Delivery",
+            ].map((place) => (
+              <TouchableOpacity key={place} style={styles.place}>
+                <Image
+                  source={
+                    place === "Sodexo"
+                      ? (images.Sodexo as ImageSourcePropType)
+                      : place === "PayLater"
+                      ? (images.PayLater as ImageSourcePropType)
+                      : place === "Wallets"
+                      ? (images.Wallets as ImageSourcePropType)
+                      : place === "NetBanking"
+                      ? (images.NetBanking as ImageSourcePropType)
+                      : (images.PayOnDelivery as ImageSourcePropType)
+                  }
+                  style={styles.images}
+                  resizeMode="contain"
+                />
+                <Text style={styles.placeText}>
+                  {place.charAt(0).toUpperCase() + place.slice(1)}
                 </Text>
               </TouchableOpacity>
-            </View>
-            <View style={styles.slot}>
-              <Text style={styles.addressText2}>
-                30 Mar ,Thu 11:00 AM to 2:00 PM
-              </Text>
-              <TouchableOpacity
-                onPress={openModal}
-                style={styles.editIconContainer}
-              >
-                <Text style={styles.selectedText2}>Change</Text>
-              </TouchableOpacity>
-            </View>
+            ))}
           </View>
         </View>
       </ScrollView>
@@ -167,6 +170,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#EDF1D6",
     flex: 1,
   },
+  placeText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    letterSpacing: 0.5,
+    color: "#000",
+    marginTop: 5,
+  },
   modalOverlay: {
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -207,12 +217,39 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: 10,
   },
-  slotCard: {
-    height: 150,
-
+  PlaceContainer: {
+    flex: 1,
+    marginTop: 5,
     backgroundColor: "#FFFFFF",
-    borderRadius: 10,
+  },
+  contentContainer3: {
+    paddingHorizontal: 10,
+  },
+  place: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    gap: 5,
+    borderRadius: 8,
+    borderBottomWidth: 1,
+    borderColor: "#CCCCCC",
+  },
+  selectedPlace: {
+    borderColor: "#0fd180",
+    backgroundColor: "#e0f7ec",
+  },
+  images: {
+    width: 24,
+    height: 24,
+  },
+  slotCard: {
+    backgroundColor: "#FFFFFF",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+
     paddingVertical: 15,
+    borderRadius: 10,
     paddingHorizontal: 10,
     borderWidth: 1,
     borderColor: "#CCCCCC",
@@ -243,6 +280,7 @@ const styles = StyleSheet.create({
     color: "#000",
     fontSize: 20,
     fontWeight: "bold",
+    letterSpacing: 1,
   },
   selectedText2: {
     fontSize: 16,
@@ -269,6 +307,7 @@ const styles = StyleSheet.create({
   addressText2: {
     fontSize: 18,
     color: "#555",
+    marginTop: 10,
   },
   editIconContainer: {
     padding: 5,
@@ -315,10 +354,7 @@ const styles = StyleSheet.create({
   textStyle2: {
     fontSize: 20,
   },
-  images: {
-    width: 44,
-    height: 44,
-  },
+
   imageContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -328,4 +364,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default delivery;
+export default selectPayment;

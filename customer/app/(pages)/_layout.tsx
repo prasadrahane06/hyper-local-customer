@@ -31,6 +31,12 @@ const PagesLayout: React.FC = () => {
           }}
         />
         <Stack.Screen
+          name="selectPayment"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
           name="chooseAddress"
           options={{
             headerShown: false,

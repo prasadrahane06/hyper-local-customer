@@ -26,10 +26,20 @@ import pin from "../assets/images/location (1).png";
 import work from "../assets/images/suitcase.png";
 import other from "../assets/images/menu.png";
 import pencil from "../assets/images/pencil.png";
+import Sodexo from "../assets/images/Sodexo.png";
+import PayLater from "../assets/images/time.png";
+import Wallets from "../assets/images/wallet.png";
+import NetBanking from "../assets/images/mobile-banking.png";
+import PayOnDelivery from "../assets/images/cash-on-delivery.png";
 
 export default {
   phone,
   pencil,
+  Sodexo,
+  PayLater,
+  Wallets,
+  NetBanking,
+  PayOnDelivery,
   eyeHide,
   eye,
   empty,
