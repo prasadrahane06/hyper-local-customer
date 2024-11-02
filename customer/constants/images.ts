@@ -31,6 +31,7 @@ import PayLater from "../assets/images/time.png";
 import Wallets from "../assets/images/wallet.png";
 import NetBanking from "../assets/images/mobile-banking.png";
 import PayOnDelivery from "../assets/images/cash-on-delivery.png";
+import rightarrow from "../assets/images/right-arrow.png";
 
 export default {
   phone,
@@ -66,4 +67,5 @@ export default {
   pin,
   work,
   other,
+  rightarrow,
 };

@@ -42,6 +42,24 @@ const PagesLayout: React.FC = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="notifications"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="myInfo"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="manageAddress"
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack>
     </View>
   );

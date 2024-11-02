@@ -11,20 +11,24 @@ import images from "../../constants/images";
 interface EmptyStateProps {
   title: string;
   subtitle: string;
-  otherstyles?: ViewStyle | ViewStyle[]; // Update to accept ViewStyle
+  otherstyles?: ViewStyle | ViewStyle[];
+  Images?: Image;
+  imageStyles?: Object;
 }
 
 const EmptyState: React.FC<EmptyStateProps> = ({
   title,
   subtitle,
   otherstyles,
+  Images,
+  imageStyles,
 }) => {
   return (
     <View style={[styles.container, otherstyles]}>
       <Image
-        source={images.empty as ImageSourcePropType}
+        source={Images as ImageSourcePropType}
         resizeMode="contain"
-        style={styles.image}
+        style={[styles.image, imageStyles]}
       />
       <Text style={styles.subtitle}>{subtitle}</Text>
     </View>

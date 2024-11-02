@@ -9,7 +9,7 @@ import {
   Image,
   ImageSourcePropType,
 } from "react-native";
-import Horizontal from "@/components/ui/horzontalScroll"; // Ensure this path is correct
+import Horizontal from "@/components/ui/horzontalScroll";
 import React from "react";
 import images from "@/constants/images";
 import Navbar from "@/components/ui/Navbar";

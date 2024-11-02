@@ -107,60 +107,43 @@ const selectPayment: React.FC = () => {
               "NetBanking",
               "Pay On Delivery",
             ].map((place) => (
-              <TouchableOpacity key={place} style={styles.place}>
-                <Image
-                  source={
-                    place === "Sodexo"
-                      ? (images.Sodexo as ImageSourcePropType)
-                      : place === "PayLater"
-                      ? (images.PayLater as ImageSourcePropType)
-                      : place === "Wallets"
-                      ? (images.Wallets as ImageSourcePropType)
-                      : place === "NetBanking"
-                      ? (images.NetBanking as ImageSourcePropType)
-                      : (images.PayOnDelivery as ImageSourcePropType)
-                  }
-                  style={styles.images}
-                  resizeMode="contain"
-                />
-                <Text style={styles.placeText}>
-                  {place.charAt(0).toUpperCase() + place.slice(1)}
-                </Text>
-              </TouchableOpacity>
+              <>
+                <TouchableOpacity key={place} style={styles.place}>
+                  <View style={styles.place2}>
+                    <View style={styles.placeIcon}>
+                      <Image
+                        source={
+                          place === "Sodexo"
+                            ? (images.Sodexo as ImageSourcePropType)
+                            : place === "PayLater"
+                            ? (images.PayLater as ImageSourcePropType)
+                            : place === "Wallets"
+                            ? (images.Wallets as ImageSourcePropType)
+                            : place === "NetBanking"
+                            ? (images.NetBanking as ImageSourcePropType)
+                            : (images.PayOnDelivery as ImageSourcePropType)
+                        }
+                        style={styles.images2}
+                        resizeMode="contain"
+                      />
+                    </View>
+                    <Text style={styles.placeText}>
+                      {place.charAt(0).toUpperCase() + place.slice(1)}
+                    </Text>
+                  </View>
+                  <View>
+                    <Image
+                      source={images.rightarrow as ImageSourcePropType}
+                      style={styles.images3}
+                      resizeMode="contain"
+                    />
+                  </View>
+                </TouchableOpacity>
+              </>
             ))}
           </View>
         </View>
       </ScrollView>
-      <View style={styles.continue}>
-        <CustomButton
-          title="Continue"
-          containerStyles={styles.button}
-          textStyles={styles.textStyle}
-          handlePress={selectPayment}
-        />
-        <Modal
-          animationType="none"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={closeModal}
-        >
-          <View style={styles.modalOverlay}>
-            <Animated.View
-              style={[styles.modalContainer, { transform: [{ translateY }] }]}
-            >
-              <TimeSlot />
-              <View style={styles.closeButton}>
-                <CustomButton
-                  title="Continue"
-                  handlePress={closeModal}
-                  containerStyles={styles.button}
-                  textStyles={styles.textStyle}
-                />
-              </View>
-            </Animated.View>
-          </View>
-        </Modal>
-      </View>
     </SafeAreaView>
   );
 };
@@ -221,6 +204,11 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 5,
     backgroundColor: "#FFFFFF",
+    paddingVertical: 15,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: "#CCCCCC",
   },
   contentContainer3: {
     paddingHorizontal: 10,
@@ -228,20 +216,42 @@ const styles = StyleSheet.create({
   place: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
     padding: 10,
-    gap: 5,
+    gap: 20,
     borderRadius: 8,
     borderBottomWidth: 1,
     borderColor: "#CCCCCC",
+  },
+  place2: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 20,
   },
   selectedPlace: {
     borderColor: "#0fd180",
     backgroundColor: "#e0f7ec",
   },
   images: {
-    width: 24,
-    height: 24,
+    width: 44,
+    height: 44,
   },
+  images3: {
+    width: 20,
+    height: 20,
+    tintColor: "#0fd180",
+  },
+  images2: {
+    width: 34,
+    height: 34,
+  },
+  placeIcon: {
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: "#CCCCCC",
+    padding: 10,
+  },
+
   slotCard: {
     backgroundColor: "#FFFFFF",
     flexDirection: "row",

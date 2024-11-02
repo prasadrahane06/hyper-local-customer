@@ -59,23 +59,26 @@ const Navbar = () => {
                   )}
                 </View>
               </TouchableOpacity>
-              <Image
-                source={images.notification as ImageSourcePropType}
-                resizeMode="contain"
-                tintColor="black"
-                style={styles.images}
-              />
-              {notificationCount > 0 && (
-                <View style={styles.badge}>
-                  <Text style={styles.badgeText}>{notificationCount}</Text>
-                </View>
-              )}
+              <TouchableOpacity onPress={() => router.push("/notifications")}>
+                <Image
+                  source={images.notification as ImageSourcePropType}
+                  resizeMode="contain"
+                  tintColor="black"
+                  style={styles.images}
+                />
+                {notificationCount > 0 && (
+                  <View style={styles.badge}>
+                    <Text style={styles.badgeText}>{notificationCount}</Text>
+                  </View>
+                )}
+              </TouchableOpacity>
             </View>
           </View>
           <SearchInput
             placeholder="Search by product name or category"
             value={""} // Make sure you have a state for the input value
             onChangeText={(text) => console.log(text)}
+            searchStyles={undefined}
           />
           <Text style={styles.dateText}>{currentDate}</Text>
         </View>
