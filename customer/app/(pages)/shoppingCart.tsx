@@ -9,17 +9,16 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import SearchInput from "../../components/ui/SearchInput";
 import EmptyState from "../../components/ui/EmptyState";
 import Card from "@/components/ui/card";
 import images from "@/constants/images";
-import Header from "@/components/ui/subCatHead";
 import Payable from "@/components/ui/payable";
 import { router } from "expo-router";
-
+import Header from "@/components/ui/headerComponent";
 const shopingCart: React.FC = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -53,17 +52,7 @@ const shopingCart: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Image
-            source={images.back as ImageSourcePropType}
-            style={styles.backImage}
-            resizeMode="contain"
-            tintColor="black"
-          />
-        </TouchableOpacity>
-        <Text style={styles.title}>Shopping Cart</Text>
-      </View>
+      <Header title="Shopping Cart" />
 
       <View style={styles.contentContainer}>
         <FlatList

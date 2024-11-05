@@ -6,11 +6,12 @@ import {
   Image,
   TouchableOpacity,
   ImageSourcePropType,
+  SafeAreaView,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import images from "@/constants/images";
 import { router } from "expo-router";
 import CustomButton from "@/components/ui/CustomButton";
+import Header from "@/components/ui/headerComponent";
 
 const chooseAddress: React.FC = () => {
   const [selectedAddressId, setSelectedAddressId] = useState<number | null>(
@@ -52,16 +53,7 @@ const chooseAddress: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Image
-            source={images.back as ImageSourcePropType}
-            style={styles.backImage}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-        <Text style={styles.title}>Choose Address</Text>
-      </View>
+      <Header title="Choose Address" />
 
       <View style={styles.contentContainer}>
         <CustomButton

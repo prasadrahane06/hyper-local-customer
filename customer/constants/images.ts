@@ -32,10 +32,13 @@ import Wallets from "../assets/images/wallet.png";
 import NetBanking from "../assets/images/mobile-banking.png";
 import PayOnDelivery from "../assets/images/cash-on-delivery.png";
 import rightarrow from "../assets/images/right-arrow.png";
+import remove from "../assets/images/bin.png";
+import Cards from "../assets/images/credit-card.png";
 
 export default {
   phone,
   pencil,
+  Cards,
   Sodexo,
   PayLater,
   Wallets,
@@ -68,4 +71,5 @@ export default {
   work,
   other,
   rightarrow,
+  remove,
 };

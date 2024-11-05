@@ -9,12 +9,14 @@ import {
   ScrollView,
   Animated,
   Modal,
+  SafeAreaView,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import images from "@/constants/images";
 import { router } from "expo-router";
 import CustomButton from "@/components/ui/CustomButton";
 import TimeSlot from "@/components/ui/timeSlots";
+import Header from "@/components/ui/headerComponent";
+
 const delivery: React.FC = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -59,17 +61,7 @@ const delivery: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Image
-            source={images.back as ImageSourcePropType}
-            style={styles.backImage}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-
-        <Text style={styles.title}>Delivery/Self Pickup</Text>
-      </View>
+      <Header title="Delivery/Self Pickup" />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.imageContainer}>
           <Image

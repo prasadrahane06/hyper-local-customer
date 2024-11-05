@@ -11,16 +11,17 @@ import {
   TouchableOpacity,
   Modal,
   Animated,
+  SafeAreaView,
 } from "react-native";
 import MapView, { Marker, Region } from "react-native-maps";
 import * as Location from "expo-location";
 import React, { useState, useEffect } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import SearchInput from "../../components/ui/SearchInput";
 import images from "@/constants/images";
 import { router } from "expo-router";
 import CustomButton from "@/components/ui/CustomButton";
 import Manual from "@/components/ui/manualAddress";
+import Header from "@/components/ui/headerComponent";
 
 const addAddress: React.FC = () => {
   const [location, setLocation] = useState<Location.LocationObject | null>(
@@ -110,18 +111,7 @@ const addAddress: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Image
-            source={images.back as ImageSourcePropType}
-            style={styles.backImage}
-            resizeMode="contain"
-            tintColor="black"
-          />
-        </TouchableOpacity>
-
-        <Text style={styles.title}>Add Address</Text>
-      </View>
+      <Header title="Add Address" />
 
       <View style={styles.imageContainer}>
         <SearchInput

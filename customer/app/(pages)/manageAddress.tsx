@@ -9,8 +9,8 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Platform,
+  SafeAreaView,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import images from "@/constants/images";
 import { router } from "expo-router";
 import CustomButton from "@/components/ui/CustomButton";
@@ -60,9 +60,67 @@ const manageAddress: React.FC = () => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <Header title="Manage Address" />
-        <ScrollView
-          contentContainerStyle={styles.scrollViewContent}
-        ></ScrollView>
+        <ScrollView>
+          <View style={styles.addressList}>
+            {addAddress.map((item) => {
+              const isSelected = selectedAddressId === item.id;
+              return (
+                <View
+                  key={item.id}
+                  style={[
+                    styles.addressCard,
+                    isSelected && styles.selectedAddressCard,
+                  ]}
+                >
+                  <TouchableOpacity
+                    onPress={() => handleSelectAddress(item.id)}
+                    style={styles.addressInfo}
+                  >
+                    <Text
+                      style={[
+                        styles.addressPlace,
+                        isSelected && styles.selectedText,
+                      ]}
+                    >
+                      {item.place}
+                    </Text>
+                    <Text style={styles.addressText}>{item.address}</Text>
+                  </TouchableOpacity>
+                  <View style={styles.imagesContainer}>
+                    <TouchableOpacity
+                      onPress={editAddress}
+                      style={styles.editIconContainer}
+                    >
+                      <Image
+                        source={images.pencil as ImageSourcePropType} // Replace with an edit icon if available
+                        style={styles.editIcon}
+                        resizeMode="contain"
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={editAddress}
+                      style={styles.editIconContainer}
+                    >
+                      <Image
+                        source={images.remove as ImageSourcePropType} // Replace with an edit icon if available
+                        style={styles.editIcon}
+                        resizeMode="contain"
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              );
+            })}
+          </View>
+        </ScrollView>
+        <View style={styles.continue}>
+          <CustomButton
+            title="Add New Address"
+            containerStyles={styles.button}
+            textStyles={styles.textStyle}
+            handlePress={Add}
+          />
+        </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -73,14 +131,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#EDF1D6",
     flex: 1,
   },
-  contentContainer: {
-    padding: 5,
-    marginTop: 5,
-    paddingHorizontal: 10,
-  },
-  scrollViewContent: {
-    alignItems: "center",
-    padding: 16,
+  continue: {
+    marginBottom: 10,
+    paddingHorizontal: 16,
   },
   title: {
     flex: 1,
@@ -90,6 +143,23 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     textAlign: "center",
   },
+  closeButton: {
+    marginTop: 10,
+    padding: 10,
+    backgroundColor: "#0fd180",
+    borderRadius: 5,
+    alignItems: "center",
+  },
+  textStyle: {
+    fontSize: 25,
+  },
+  button: {
+    width: "100%",
+    minHeight: 50,
+    borderRadius: 10,
+    backgroundColor: "#0fd180",
+    borderColor: "transparent",
+  },
   title2: {
     fontWeight: "bold",
     fontSize: 20,
@@ -97,6 +167,13 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     paddingHorizontal: 16,
     paddingVertical: 10,
+  },
+  imagesContainer: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    gap: 5,
+    marginTop: 10,
   },
   headerContainer: {
     flexDirection: "row",
@@ -110,19 +187,11 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
   },
-  textStyle: {
-    fontSize: 25,
-  },
-  button: {
-    width: "100%",
-    minHeight: 50,
-    borderRadius: 10,
-    backgroundColor: "#0fd180",
-    borderColor: "transparent",
-  },
+
   addressList: {
     paddingHorizontal: 10,
     marginTop: 10,
+    width: "100%",
   },
   addressCard: {
     backgroundColor: "#FFFFFF",
@@ -131,9 +200,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderWidth: 1,
     borderColor: "#CCCCCC",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
   },
   selectedAddressCard: {
     borderColor: "#0fd180",
@@ -159,8 +225,8 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   editIcon: {
-    width: 20,
-    height: 20,
+    width: 15,
+    height: 15,
     tintColor: "#0fd180", // Adjust tint color as needed
   },
 });

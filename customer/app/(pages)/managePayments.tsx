@@ -16,6 +16,7 @@ import images from "@/constants/images";
 import { router } from "expo-router";
 import Payable from "@/components/ui/payable";
 import Header from "@/components/ui/headerComponent";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
 
 interface Category {
   id: string;
@@ -27,23 +28,21 @@ interface Category {
   price: string;
 }
 
-const Notifications: React.FC = () => {
+const managePayments: React.FC = () => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const [categories, setCategories] = useState<Category[]>([
-    {
-      id: "1",
-
-      title: "Limited Time Offer!",
-      message: "Get 20% off on Sugar and Honey this week only!",
-      timestamp: "2024-11-01T10:00:00Z", // Example timestamp
-    },
-    {
-      id: "2",
-
-      title: "Freshly Baked!",
-      message: "Enjoy a buy one, get one free deal on Bread today!",
-      timestamp: "2024-11-01T11:00:00Z", // Example timestamp
-    },
+    // {
+    //   id: "1",
+    //   title: "Limited Time Offer!",
+    //   message: "Get 20% off on Sugar and Honey this week only!",
+    //   timestamp: "2024-11-01T10:00:00Z", // Example timestamp
+    // },
+    // {
+    //   id: "2",
+    //   title: "Freshly Baked!",
+    //   message: "Enjoy a buy one, get one free deal on Bread today!",
+    //   timestamp: "2024-11-01T11:00:00Z", // Example timestamp
+    // },
   ]);
 
   const onRefresh = async () => {
@@ -53,7 +52,7 @@ const Notifications: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title="Notifications" />
+      <Header title="Manage Payments" />
 
       <View style={styles.contentContainer}>
         <FlatList
@@ -72,9 +71,9 @@ const Notifications: React.FC = () => {
           )}
           ListEmptyComponent={() => (
             <EmptyState
-              title="No notifications yet"
-              subtitle="No notifications yet"
-              Images={images.notification}
+              title="No Saved Cards Found"
+              subtitle="No Saved Cards Found"
+              Images={images.Cards}
               imageStyles={styles.imageStyless}
             />
           )}
@@ -221,4 +220,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Notifications;
+export default managePayments;
