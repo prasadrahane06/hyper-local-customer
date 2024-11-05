@@ -10,6 +10,7 @@ import Header from "@/components/ui/headerComponent";
 import EmptyState from "@/components/ui/EmptyState";
 import OrderCard from "@/components/ui/OrderCard";
 import images from "@/constants/images";
+import { router } from "expo-router";
 
 const ordersData = [
   {
@@ -26,6 +27,7 @@ const ordersData = [
     date: "2024-10-15",
   },
 ];
+
 const orders: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
@@ -43,7 +45,7 @@ const orders: React.FC = () => {
               savingsLost={item.savingsLost}
               status={item.status}
               date={item.date}
-              onPressDetails={() => alert(`Details for order ${order.orderId}`)}
+              onPressDetails={() => router.push(`/orderDetails`)}
             />
           )}
           ListEmptyComponent={() => (
