@@ -66,6 +66,12 @@ const PagesLayout: React.FC = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="changepass"
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack>
     </View>
   );

@@ -62,8 +62,8 @@ const FormField: React.FC<FormFieldProps> = ({
           {...props}
         />
 
-        {(title === "Password" ||
-          title === "Enter New Password" ||
+        {(title === "Old Password" ||
+          title === "New Password" ||
           title === "Confirm Password") && (
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
             <Image

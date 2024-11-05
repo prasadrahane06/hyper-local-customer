@@ -37,7 +37,7 @@ const menuItems = [
     title: "Change Password",
     icon: Ionicons,
     iconName: "lock-closed-outline",
-    route: "/changePassword",
+    route: "/changepass",
   },
   // Add more items as needed
 ];

@@ -34,6 +34,7 @@ import PayOnDelivery from "../assets/images/cash-on-delivery.png";
 import rightarrow from "../assets/images/right-arrow.png";
 import remove from "../assets/images/bin.png";
 import Cards from "../assets/images/credit-card.png";
+import reset from "../assets/images/reset.png";
 
 export default {
   phone,
@@ -47,6 +48,7 @@ export default {
   eyeHide,
   eye,
   empty,
+  reset,
   search,
   enter,
   back,
