@@ -67,13 +67,12 @@ const Profile = () => {
             </View>
           </View>
 
-          {/* Menu Items */}
           <View style={styles.menu}>
             {menuItems.map((item, index) => (
               <TouchableOpacity
                 key={index}
                 style={styles.menuItem}
-                onPress={() => router.push(item.route)} // Navigate to the specific route
+                onPress={() => router.push(item.route)}
               >
                 <View style={styles.menuIcon}>
                   <item.icon name={item.iconName} size={24} color="#4F4F4F" />
