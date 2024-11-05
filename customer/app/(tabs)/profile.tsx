@@ -39,6 +39,12 @@ const menuItems = [
     iconName: "lock-closed-outline",
     route: "/changepass",
   },
+  {
+    title: "Logout",
+    icon: Ionicons,
+    iconName: "log-out",
+    route: "/",
+  },
   // Add more items as needed
 ];
 const Profile = () => {
