@@ -40,9 +40,14 @@ const OrderCard: React.FC<OrderCardProps> = ({
             Savings Lost ₹{savingsLost.toFixed(2)}
           </Text>
         )}
-        <TouchableOpacity style={styles.detailsButton} onPress={onPressDetails}>
-          <Text style={styles.detailsButtonText}>View Details</Text>
-        </TouchableOpacity>
+        <View style={styles.detailsButton1}>
+          <TouchableOpacity
+            style={styles.detailsButton}
+            onPress={onPressDetails}
+          >
+            <Text style={styles.detailsButtonText}>View Details</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -92,12 +97,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   detailsButton: {
-    backgroundColor: "#e67e22",
+    backgroundColor: "#0fd180",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 4,
     alignSelf: "flex-start",
     marginTop: 10,
+  },
+  detailsButton1: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
   },
   detailsButtonText: {
     color: "#fff",

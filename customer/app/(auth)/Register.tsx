@@ -10,14 +10,15 @@ import {
   Platform,
   StyleSheet,
   ImageSourcePropType,
+  SafeAreaView,
 } from "react-native";
 import images from "../../constants/images";
 import { router } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "@/components/ui/FormField";
 import CustomButton from "@/components/ui/CustomButton";
 import { Picker } from "@react-native-picker/picker";
 import { State, City, IState, ICity } from "country-state-city";
+import Header from "@/components/ui/headerComponent";
 const Register: React.FC = () => {
   const [form, setForm] = useState({
     firstname: "",
@@ -48,23 +49,14 @@ const Register: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Header title="Sign up" />
+
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View style={styles.content}>
-            <View style={styles.headerContainer}>
-              <TouchableOpacity onPress={() => router.back()}>
-                <Image
-                  source={images.back as ImageSourcePropType}
-                  style={styles.backImage}
-                  resizeMode="contain"
-                  tintColor="black"
-                />
-              </TouchableOpacity>
-              <Text style={styles.title}>SIGN UP</Text>
-            </View>
             <FormField
               title="Firstname"
               value={form.firstname}

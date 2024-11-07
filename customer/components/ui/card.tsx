@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     color: "#000",
     fontWeight: "500",
     paddingHorizontal: 4,
-    backgroundColor: "#10B981",
+    backgroundColor: "#0fd180",
     paddingVertical: 2,
     borderRadius: 4,
     marginTop: 4,
